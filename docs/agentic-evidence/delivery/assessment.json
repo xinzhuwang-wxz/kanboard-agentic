@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1",
+  "projectId": "project-a76fe000898b",
+  "baseCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+  "detectedStack": [],
+  "businessFlows": [
+    "Pinned Kanboard 1.2.56 task reads and host-owned assignee/status mutations preserving authenticated project roles and CSRF."
+  ],
+  "identity": [
+    "Unknown: requires host-specific authenticated session and authorization review."
+  ],
+  "evidence": [
+    {
+      "path": "composer.json",
+      "sha256": "48da225091408b7ccb372ff6699050af937784fca05a6d6015e659c329413295",
+      "startLine": 1,
+      "endLine": 71,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Controller/TaskModificationController.php",
+      "sha256": "bd8c651eee130c17b4e77ecbccca5a09a70f648491ba035d2fb11d37104741f3",
+      "startLine": 1,
+      "endLine": 183,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Controller/TaskStatusController.php",
+      "sha256": "1623475de91b3d4b9a5c6348bc3acf7145ac78a3a04431e870f1a30c8d5af635",
+      "startLine": 1,
+      "endLine": 63,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Helper/ProjectRoleHelper.php",
+      "sha256": "cc860ceee59eb7794b2ebc2149a13d5051acb334e291d3548cdb7159fd74a489",
+      "startLine": 1,
+      "endLine": 339,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Model/TaskModificationModel.php",
+      "sha256": "26a717b1063d7225728ac273de7231ec93f74a2f0128b496a18a02880f810750",
+      "startLine": 1,
+      "endLine": 135,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Model/TaskStatusModel.php",
+      "sha256": "0c7397dbd789140761067f493a3de8717bfaa9b4028e722d5111ab347391066f",
+      "startLine": 1,
+      "endLine": 145,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Middleware/ProjectAuthorizationMiddleware.php",
+      "sha256": "41a596f226c7d45ca4c96eab8f2f96bf2ec2df5bc390c8f907d20023c6b37c6d",
+      "startLine": 1,
+      "endLine": 54,
+      "note": "Observed bounded source; not executed."
+    },
+    {
+      "path": "app/Template/layout.php",
+      "sha256": "d54d76b034507cadbe0eefd55aceb5fb7f2fc13abaee1142a818906636cb540b",
+      "startLine": 1,
+      "endLine": 80,
+      "note": "Observed bounded source; not executed."
+    }
+  ],
+  "supportLevel": "L2",
+  "unknowns": [
+    "Static analysis does not establish production authentication, runtime permissions, deployment, or browser behavior."
+  ],
+  "baseline": "not-run"
+}

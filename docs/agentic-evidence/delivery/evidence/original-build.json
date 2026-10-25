@@ -1,0 +1,15 @@
+{
+  "language": "PHP8.4.27",
+  "sourceTreeHash": "ed8edb8f03935cd1f0d52a12adfa799c86e861c40964878118607f2879bca4ba",
+  "phpLint": [
+    "index.php"
+  ],
+  "javascriptSyntax": [],
+  "exitCode": 0,
+  "tests": 53,
+  "assertions": 475,
+  "stdout": "PHPUnit 12.5.40 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.4.27\nConfiguration: /workspace/scratch/3f0d047b74f0/kanboard-agentic/tests/units.sqlite.xml\n\n.....................................................             53 / 53 (100%)\n\nTime: 00:14.111, Memory: 60.06 MB\n\nOK (53 tests, 475 assertions)\n",
+  "stdoutHash": "da61ac4affcc2cac076ef4f23de56174dc570c5d96373a94b4755301e68ff7a0",
+  "phpunitHash": "83f8098d7e6513befa61cd0df2689d42398d43404969b0dc21528ff52674ebc6",
+  "stopwatchHash": "09402e8388ccc527dc6eb3e53d4f579e4cabcfff21600d2a03e8036b0983211f"
+}

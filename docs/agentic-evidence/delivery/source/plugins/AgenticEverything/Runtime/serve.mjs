@@ -1,0 +1,51 @@
+/** Single local AE owner. PHP owns identity, permissions and task receipts; AE owns tool governance. */
+import {spawn,spawnSync} from 'node:child_process';
+import {createServer} from 'node:http';
+import {randomBytes,timingSafeEqual} from 'node:crypto';
+import {createRequire} from 'node:module';
+import {resolve,isAbsolute} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {realpathSync,statSync} from 'node:fs';
+const root=process.env.AE_ROOT,php=process.env.AE_PHP;
+if(!root||!isAbsolute(root)||realpathSync(root)!==root||!php||!isAbsolute(php)||!statSync(php).isFile())throw Error('Set trusted absolute AE_ROOT and AE_PHP paths');
+const load=path=>import(pathToFileURL(resolve(root,path)).href);
+const {z}=createRequire(resolve(root,'package.json'))('zod');
+const {GovernedRuntime}=await load('packages/runtime-core/dist/index.js');
+const {ToolBroker,validateDefinitions,parseCapabilityArguments,validateCapabilityResult}=await load('packages/capabilities/dist/index.js');
+const {digest,PolicyError,samePrincipal}=await load('packages/policy/dist/index.js');
+const {PrincipalSchema}=await load('packages/contracts/dist/index.js');
+const hostFile=fileURLToPath(new URL('./host.php',import.meta.url));
+const hostRoot=resolve(fileURLToPath(new URL('../../../',import.meta.url)));
+const taskArgs=z.strictObject({taskId:z.string().regex(/^[1-9][0-9]*$/)});
+const writeArgs=z.strictObject({taskId:taskArgs.shape.taskId,field:z.enum(['owner_id','is_active']),value:z.number().int().nonnegative(),expectedVersion:z.string().regex(/^[a-f0-9]{64}$/)});
+const def=(name,args,write)=>({parameters:args,capability:{schemaVersion:'1',capabilityId:name,version:'1',description:write?'Change one task assignee or open/closed status through Kanboard after explicit approval.':'Read one task in the authenticated user’s project.',inputSchema:z.toJSONSchema(args),outputSchema:{},risk:write?'write':'read',requiredScopes:[write?'tasks:write':'tasks:read'],sourceRevision:'kanboard-e197e71-ae-v1',bindingHash:digest({name,schema:z.toJSONSchema(args)}),approvalRequired:write,idempotency:'operation-key',supportsOutcomeQuery:true,timeoutMs:10000}});
+const definitions=validateDefinitions({read_task:def('read_task',taskArgs,false),change_task:def('change_task',writeArgs,true)});
+class KanboardHost{
+ constructor(targetId){this.targetId=targetId;}
+ policyVersion='kanboard-task-v1';definitions=definitions;
+ rpc(action,principal,args={}){const p=spawnSync(php,[hostFile],{input:JSON.stringify({action,principal,arguments:args}),encoding:'utf8',timeout:10000,maxBuffer:1024*1024,env:process.env});if(p.error||p.status!==0)throw Error('Host returned no authoritative response');let r;try{r=JSON.parse(p.stdout);}catch{throw Error('Invalid host response');}if(!r.ok)throw new PolicyError('HOST_DENIED: '+r.error);return r.result;}
+ current(p){const identity=PrincipalSchema.parse(p),current=PrincipalSchema.parse(this.rpc('current',identity));if(!samePrincipal(identity,current))throw new PolicyError('PRINCIPAL_CHANGED');return current;}
+ supports(name){return Object.hasOwn(definitions,name);}
+ authorizeCapability(p,name){if(!this.supports(name))throw new PolicyError('CAPABILITY_NOT_ALLOWED');this.current(p);}
+ referenceTarget(name,args){return parseCapabilityArguments(definitions,name,args).taskId;}
+ read(p,id){if(this.targetId&&id!==this.targetId)throw new PolicyError('RUN_TARGET_DENIED');const r=this.rpc('read',this.current(p),{task_id:id});if(String(r.task.id)!==id)throw new PolicyError('TARGET_MISMATCH');return r;}
+ prepareTarget(p,name,args){this.authorizeCapability(p,name);const a=parseCapabilityArguments(definitions,name,args),r=this.read(p,a.taskId);if(name==='read_task')return{targetId:a.taskId,preview:{taskId:a.taskId,title:r.task.title}};if(r.task.version!==a.expectedVersion)throw new PolicyError('RESOURCE_VERSION_CONFLICT');this.rpc('authorize',this.current(p),{task_id:a.taskId,field:a.field,value:a.value});return{targetId:a.taskId,expectedResourceVersion:a.expectedVersion,preview:{taskId:a.taskId,title:r.task.title,field:a.field,before:r.task[a.field],after:a.value,version:a.expectedVersion}};}
+ assertReadable(p,target){this.read(p,target.targetId);}
+ readResult(p,request){return this.read(p,request.targetId).task;}
+ write(p,request){const a=writeArgs.parse(request.arguments);if(request.capabilityId!=='change_task'||request.targetId!==a.taskId||request.expectedResourceVersion!==a.expectedVersion)throw new PolicyError('REQUEST_BINDING_MISMATCH');this.rpc('prepare',this.current(p),{task_id:a.taskId,field:a.field,value:a.value,version:a.expectedVersion,operation_id:request.operationId});const receipt=this.rpc('confirm',this.current(p),{operation_id:request.operationId});return validateCapabilityResult(request.operationId,{status:'succeeded',operationId:request.operationId,receiptId:request.operationId,data:receipt});}
+ query(p,operationId){const r=this.rpc('receipt',this.current(p),{operation_id:operationId});return r.state==='completed'?{status:'succeeded',operationId,receiptId:operationId,data:r.receipt}:{status:'outcome-unknown',operationId,message:'Host receipt is not completed. Manual review required; no automatic retry.'};}
+}
+const host=new KanboardHost(),runs=new Map();
+function demo(args){let turn=0;return{async complete(request){turn++;const calls=turn===1?[{callId:'read',name:'read_task',arguments:{taskId:args.taskId}}]:turn===2?[{callId:'change',name:'change_task',arguments:args}]:[];return{schemaVersion:'1',requestId:request.requestId,mode:'simulated',message:calls.length?'':'The Kanboard host receipt confirms the change.',toolCalls:calls,finishReason:calls.length?'tool-calls':'stop'};}};}
+let configuredModel;
+if(process.env.AE_MODEL_DIRECTORY){const directory=process.env.AE_MODEL_DIRECTORY;if(!isAbsolute(directory)||realpathSync(directory)!==directory||!statSync(directory).isDirectory())throw Error('Invalid trusted model directory');const {FileModelProvider}=await load('packages/runtime-adapters/dist/index.js');configuredModel=new FileModelProvider(directory,20000);}
+async function handle(r){const p=host.current(PrincipalSchema.parse(r.principal));if(r.action==='start'){if(runs.size>=100)throw Error('Local run bound reached; restart after resolving existing runs');const a=writeArgs.parse({taskId:String(r.data.task_id),field:r.data.field,value:Number(r.data.value),expectedVersion:r.data.version});const current=host.read(p,a.taskId);const runtime=new GovernedRuntime({broker:new ToolBroker(new KanboardHost(a.taskId)),model:configuredModel||demo(a),maxTurns:4,maxElapsedMs:240000});const view=await runtime.start({principal:p,releaseId:'kanboard-reviewed-v1',input:JSON.stringify({goal:'Read this task and propose exactly the requested change',...a})});if(view.status!=='awaiting-approval'||!view.approval)throw Error(view.message||'No approval produced');const b=view.approval.binding;if(b.capabilityId!=='change_task'||b.targetId!==a.taskId||b.argumentsHash!==digest(a)||b.resourceVersion!==a.expectedVersion){runtime.cancel(view.runId,p);throw Error('Model proposal differs from the requested task change');}const record={runtime,p,view,operationId:b.operationId};runs.set(b.operationId,record);return{operation_id:b.operationId,run_id:view.runId,task:current.task,change:{field:a.field,before:current.task[a.field],value:a.value},expires:Math.floor(Date.now()/1000)+300,impact:'AE GovernedRuntime approval binds principal, capability, arguments, resource version, release and policy. Closing also closes subtasks.',approval:view.approval,modelMode:configuredModel?'subagent-simulation-file-port':'deterministic-demo'};}
+if(r.action==='cancel'){const record=runs.get(r.data.operation_id);if(!record||!samePrincipal(p,record.p))throw Error('Run unavailable or identity mismatch');record.view=record.runtime.cancel(record.view.runId,p);return {state:record.view.status};}
+if(r.action==='decide'){const record=runs.get(r.data.operation_id);if(!record||!samePrincipal(p,record.p))throw Error('Run unavailable or identity mismatch. Pending approvals do not survive restart.');const a=record.view.approval;if(!a)throw Error('Confirmation already consumed');if(r.data.approval_id!==a.binding.approvalId||r.data.expected_hash!==a.expectedHash)throw Error('Approval binding mismatch');const done=await record.runtime.decide(record.view.runId,p,{approvalId:a.binding.approvalId,expectedHash:a.expectedHash,decision:'approve'});record.view=done;if(done.status!=='succeeded')throw Error(done.message||done.status);const receipt=done.receipts.filter(x=>x.status==='succeeded'&&x.operationId===record.operationId).at(-1);if(!receipt)throw Error('Missing authoritative write receipt');return receipt.data;}
+throw Error('Unknown runtime action');}
+const token=randomBytes(32).toString('hex');const server=createServer(async(req,res)=>{res.setHeader('Content-Type','application/json');const supplied=Buffer.from(req.headers.authorization||''),expected=Buffer.from('Bearer '+token);if(req.method!=='POST'||supplied.length!==expected.length||!timingSafeEqual(supplied,expected)){res.writeHead(403);return res.end(JSON.stringify({ok:false,error:'Denied'}));}let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>65536){res.writeHead(413);return res.end();}}try{res.end(JSON.stringify({ok:true,result:await handle(JSON.parse(raw))}));}catch(e){res.writeHead(409);res.end(JSON.stringify({ok:false,error:e instanceof Error?e.message:'Runtime denied'}));}});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const port=Number(process.env.AE_HTTP_PORT||18856);if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid loopback host port');
+const child=spawn(php,['-S',`127.0.0.1:${port}`,'-t',hostRoot],{env:{...process.env,AE_BRIDGE_PORT:String(server.address().port),AE_BRIDGE_TOKEN:token},stdio:['ignore','inherit','inherit']});
+console.log(JSON.stringify({ready:true,url:`http://127.0.0.1:${port}`,modelMode:configuredModel?'subagent-simulation-file-port':'deterministic-demo',persistence:'in-memory AE runs; durable host receipts'}));
+let stopping=false;const stop=()=>{if(stopping)return;stopping=true;child.kill();server.close();};process.on('SIGTERM',stop);process.on('SIGINT',stop);child.on('exit',()=>{server.close();});

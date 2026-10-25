@@ -1,0 +1,501 @@
+{
+  "schemaVersion": "1",
+  "kind": "ae-delivery",
+  "toolVersion": "0.1.0",
+  "status": "complete",
+  "startedAt": "2026-10-25T08:07:40.822Z",
+  "createdAt": "2026-10-25T08:09:17.301Z",
+  "projectId": "project-a76fe000898b",
+  "baseCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+  "recipe": {
+    "id": "kanboard-upstream",
+    "version": "1.0.4"
+  },
+  "chain": {
+    "assessmentHash": "1208efc146566ea3f65f98590c94025cfe3289c775a1009c74a119ea31145b03",
+    "planHash": "8aef83d58767ad00dc52e1e5f6717e2775a8efdec916ef887f16a4e46d404366",
+    "approvalHash": "7f0540fd77dc468e9432ac02d7583374fc85b302d6d2ce6a8ed59f1f9ba53436",
+    "appliedHash": "b7e6c11bc13827e102e1083581a801d0d68b1627cbb455aeedef9016e05e607b",
+    "verificationHash": "0a32799e1039aa31a943205d6c9de97fd2540bf725aec252bbc305a29974a744",
+    "preApplyBaselineHash": "54181feb24a7201a0715da875c56832f114fd7f459a1b961b4c072937883b21e"
+  },
+  "baselineCodeHash": "684dbf7bf201784e2098e400c920a7192bdbe69a03313f2fe5842c613d3b0cc6",
+  "candidateCodeHash": "4c81abe86f9f63406df1aacbcfdd9b5a7f372a5fb251da233899d2610f0fe295",
+  "permissions": {
+    "allowedPaths": [
+      "plugins/AgenticEverything/Assets/assistant.css",
+      "plugins/AgenticEverything/Assets/assistant.js",
+      "plugins/AgenticEverything/Controller/AeController.php",
+      "plugins/AgenticEverything/LICENSE",
+      "plugins/AgenticEverything/Plugin.php",
+      "plugins/AgenticEverything/README.md",
+      "plugins/AgenticEverything/Runtime/host.php",
+      "plugins/AgenticEverything/Runtime/serve.mjs",
+      "plugins/AgenticEverything/Schema/Sqlite.php",
+      "plugins/AgenticEverything/THIRD_PARTY_NOTICES.md",
+      "plugins/AgenticEverything/Template/assistant.php",
+      "plugins/AgenticEverything/Template/settings.php",
+      "plugins/AgenticEverything/Template/sidebar.php",
+      "plugins/AgenticEverything/licenses/GPL-3.0.txt"
+    ],
+    "allowedCommands": [],
+    "networkAllowlist": [],
+    "maximumCostUsd": 0,
+    "excludedActions": [
+      "deployment",
+      "publishing",
+      "dependency installation",
+      "source execution outside the exact pinned upstream verification profile",
+      "paid model calls"
+    ],
+    "verificationAuthorization": {
+      "version": "1",
+      "profile": "kanboard-upstream-v1",
+      "actions": [
+        "baseline-differential",
+        "host-build",
+        "runtime-http",
+        "browser"
+      ],
+      "isolation": "exact-pinned-upstream-temporary-worktree",
+      "network": "loopback-only-no-external",
+      "maximumCostUsd": 0,
+      "maximumElapsedMs": 300000,
+      "maximumHeapMiB": 640,
+      "sourceCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "assessment.json",
+      "sha256": "bb6337d3eb1b169e53e6bd24cc92cc84f3390ff349992be87dc583382487f6d7",
+      "bytes": 2597
+    },
+    {
+      "path": "plan.json",
+      "sha256": "84fc94a2d697e53222c3a513c03a06bfec64c627b6ab83c7369cfdf24738aeb9",
+      "bytes": 2990
+    },
+    {
+      "path": "approval.json",
+      "sha256": "71f6f7829638b4b5c436bc38d87c20ecab48ab830f5c97d0600f8e52987b54e4",
+      "bytes": 1915
+    },
+    {
+      "path": "applied.json",
+      "sha256": "25f0a374e1f7f06d79f05b0c445ea370b34290f5d1f1c8021920ae1b830e58b7",
+      "bytes": 143361
+    },
+    {
+      "path": "verification.json",
+      "sha256": "dbd4e6169f192010253fb255c3abf7e9d334002a6db0c8d3cac7148022f71671",
+      "bytes": 12689
+    },
+    {
+      "path": "pre-apply-baseline.json",
+      "sha256": "0a7ce3a1c79003637891b04f27e48a5bcf878b1bff12c3a6e048ae8a90c0a0b5",
+      "bytes": 138544
+    },
+    {
+      "path": "evidence/report.json",
+      "sha256": "a03fc4f4a553f6a7a37d83ca4c4abf00d239e4e95379ea12d579ad1bc5d622cb",
+      "bytes": 5682
+    },
+    {
+      "path": "evidence/baseline.json",
+      "sha256": "20f12a9be8e5f367d910774939ca3b74a3ea4f47e1575c3a842b1a04bc4eb60e",
+      "bytes": 137590
+    },
+    {
+      "path": "evidence/differential.json",
+      "sha256": "faeceae93f937b2dfc26ac0443633ffa16e577f55027933752444e28ca383357",
+      "bytes": 137405
+    },
+    {
+      "path": "evidence/original-build.json",
+      "sha256": "c87a58771072da0be317a454668393db96013d54b6821a9edd404c49ebdcb4c3",
+      "bytes": 833
+    },
+    {
+      "path": "evidence/candidate-build.json",
+      "sha256": "dbe60f92cb3a778316db5efdd72974011485f18ed62f1d7b7492f79b21a13a28",
+      "bytes": 1320
+    },
+    {
+      "path": "evidence/runtime.json",
+      "sha256": "1cc5a5204c6a896daee199e0112f7e8bd850861a3ae0214cbbcc25b8a549ce04",
+      "bytes": 630488
+    },
+    {
+      "path": "evidence/browser.json",
+      "sha256": "f3724f10ec294b030a2275141e1d0eb90e364e7f5b7c013c7f6975233c547128",
+      "bytes": 913154
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Assets/assistant.css",
+      "sha256": "8901c615f201fc308e4425063510a7b7df4879e8e0e9418c2895a3bf63bc6b9d",
+      "bytes": 1926
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Assets/assistant.js",
+      "sha256": "b16def5a9cf35cc940b13b90aed6af1d44feaa4ed14e59b71617352899b6e7ce",
+      "bytes": 7205
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Controller/AeController.php",
+      "sha256": "c25c483d197558a8ca1b277a9dc1a0d9b7f018f7dba9cf413cbdc03053618f80",
+      "bytes": 11657
+    },
+    {
+      "path": "source/plugins/AgenticEverything/LICENSE",
+      "sha256": "88fb961d3b6cd2a0abf7e42d5dbe866cfc943cab3f6b678af9f49a0a430d5cff",
+      "bytes": 1062
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Plugin.php",
+      "sha256": "cdae76374c85f5ccb31ec778f6f3ede99baa9285779aa6ad435ab6530ec88f55",
+      "bytes": 1260
+    },
+    {
+      "path": "source/plugins/AgenticEverything/README.md",
+      "sha256": "6f1fa932b38a26a43644f07fd202b0a8c1fd9f1b4d3c74d0d6e718c3c2c35b0d",
+      "bytes": 6152
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Runtime/host.php",
+      "sha256": "6e6855d1d97f0641851ab2c651f682c1c39099fe9f1b57fb8b74464050140200",
+      "bytes": 1942
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Runtime/serve.mjs",
+      "sha256": "0c3ac64e0c50bf742928672a98394827824ab9c86a49ac91698c9448f1843f36",
+      "bytes": 10252
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Schema/Sqlite.php",
+      "sha256": "da46d77cefdc51486a1769fe21af851f93b0d1d21989430d2179a452871f6b6f",
+      "bytes": 364
+    },
+    {
+      "path": "source/plugins/AgenticEverything/THIRD_PARTY_NOTICES.md",
+      "sha256": "f79a823cfa369b45e4d18f951e992c7a82fa99a47362fa9ede40994bb6c9c327",
+      "bytes": 1880
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Template/assistant.php",
+      "sha256": "cbce6ecc831978505300b55e169bd2b1aaab22acd1ee1f3758ff49b7b0a4c7f0",
+      "bytes": 1715
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Template/settings.php",
+      "sha256": "3a2454e6aefcc4891c41edbf6e03d98eea83567102477fdde1f48ac3221860b6",
+      "bytes": 1536
+    },
+    {
+      "path": "source/plugins/AgenticEverything/Template/sidebar.php",
+      "sha256": "86084d6e8052386d1b5b471fe16ecd4e685711a85adc4f75b60af157d5fd8130",
+      "bytes": 113
+    },
+    {
+      "path": "source/plugins/AgenticEverything/licenses/GPL-3.0.txt",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149
+    }
+  ],
+  "checks": [
+    {
+      "name": "patch:plugins/AgenticEverything/Assets/assistant.css",
+      "status": "pass",
+      "expected": "8901c615f201fc308e4425063510a7b7df4879e8e0e9418c2895a3bf63bc6b9d",
+      "actual": "8901c615f201fc308e4425063510a7b7df4879e8e0e9418c2895a3bf63bc6b9d",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Assets/assistant.css",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Assets/assistant.js",
+      "status": "pass",
+      "expected": "b16def5a9cf35cc940b13b90aed6af1d44feaa4ed14e59b71617352899b6e7ce",
+      "actual": "b16def5a9cf35cc940b13b90aed6af1d44feaa4ed14e59b71617352899b6e7ce",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Assets/assistant.js",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Controller/AeController.php",
+      "status": "pass",
+      "expected": "c25c483d197558a8ca1b277a9dc1a0d9b7f018f7dba9cf413cbdc03053618f80",
+      "actual": "c25c483d197558a8ca1b277a9dc1a0d9b7f018f7dba9cf413cbdc03053618f80",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Controller/AeController.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/LICENSE",
+      "status": "pass",
+      "expected": "88fb961d3b6cd2a0abf7e42d5dbe866cfc943cab3f6b678af9f49a0a430d5cff",
+      "actual": "88fb961d3b6cd2a0abf7e42d5dbe866cfc943cab3f6b678af9f49a0a430d5cff",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/LICENSE",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Plugin.php",
+      "status": "pass",
+      "expected": "cdae76374c85f5ccb31ec778f6f3ede99baa9285779aa6ad435ab6530ec88f55",
+      "actual": "cdae76374c85f5ccb31ec778f6f3ede99baa9285779aa6ad435ab6530ec88f55",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Plugin.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/README.md",
+      "status": "pass",
+      "expected": "6f1fa932b38a26a43644f07fd202b0a8c1fd9f1b4d3c74d0d6e718c3c2c35b0d",
+      "actual": "6f1fa932b38a26a43644f07fd202b0a8c1fd9f1b4d3c74d0d6e718c3c2c35b0d",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/README.md",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Runtime/host.php",
+      "status": "pass",
+      "expected": "6e6855d1d97f0641851ab2c651f682c1c39099fe9f1b57fb8b74464050140200",
+      "actual": "6e6855d1d97f0641851ab2c651f682c1c39099fe9f1b57fb8b74464050140200",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Runtime/host.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Runtime/serve.mjs",
+      "status": "pass",
+      "expected": "0c3ac64e0c50bf742928672a98394827824ab9c86a49ac91698c9448f1843f36",
+      "actual": "0c3ac64e0c50bf742928672a98394827824ab9c86a49ac91698c9448f1843f36",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Runtime/serve.mjs",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Schema/Sqlite.php",
+      "status": "pass",
+      "expected": "da46d77cefdc51486a1769fe21af851f93b0d1d21989430d2179a452871f6b6f",
+      "actual": "da46d77cefdc51486a1769fe21af851f93b0d1d21989430d2179a452871f6b6f",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Schema/Sqlite.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/THIRD_PARTY_NOTICES.md",
+      "status": "pass",
+      "expected": "f79a823cfa369b45e4d18f951e992c7a82fa99a47362fa9ede40994bb6c9c327",
+      "actual": "f79a823cfa369b45e4d18f951e992c7a82fa99a47362fa9ede40994bb6c9c327",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/THIRD_PARTY_NOTICES.md",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Template/assistant.php",
+      "status": "pass",
+      "expected": "cbce6ecc831978505300b55e169bd2b1aaab22acd1ee1f3758ff49b7b0a4c7f0",
+      "actual": "cbce6ecc831978505300b55e169bd2b1aaab22acd1ee1f3758ff49b7b0a4c7f0",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Template/assistant.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Template/settings.php",
+      "status": "pass",
+      "expected": "3a2454e6aefcc4891c41edbf6e03d98eea83567102477fdde1f48ac3221860b6",
+      "actual": "3a2454e6aefcc4891c41edbf6e03d98eea83567102477fdde1f48ac3221860b6",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Template/settings.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/Template/sidebar.php",
+      "status": "pass",
+      "expected": "86084d6e8052386d1b5b471fe16ecd4e685711a85adc4f75b60af157d5fd8130",
+      "actual": "86084d6e8052386d1b5b471fe16ecd4e685711a85adc4f75b60af157d5fd8130",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/Template/sidebar.php",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "patch:plugins/AgenticEverything/licenses/GPL-3.0.txt",
+      "status": "pass",
+      "expected": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "actual": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "evidence": []
+    },
+    {
+      "name": "syntax:plugins/AgenticEverything/licenses/GPL-3.0.txt",
+      "status": "pass",
+      "expected": "Exact reviewed Kanboard plugin template",
+      "actual": "Reviewed template matches; PHP lint and host runtime require the approved pinned-source profile",
+      "evidence": []
+    },
+    {
+      "name": "original-business-source",
+      "status": "pass",
+      "expected": "26a717b1063d7225728ac273de7231ec93f74a2f0128b496a18a02880f810750",
+      "actual": "26a717b1063d7225728ac273de7231ec93f74a2f0128b496a18a02880f810750",
+      "evidence": []
+    },
+    {
+      "name": "host-compilation",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "PHP original/generated syntax and generated JavaScript parse passed",
+      "evidence": [
+        {
+          "path": "evidence/original-build.json",
+          "sha256": "c87a58771072da0be317a454668393db96013d54b6821a9edd404c49ebdcb4c3",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        },
+        {
+          "path": "evidence/candidate-build.json",
+          "sha256": "dbe60f92cb3a778316db5efdd72974011485f18ed62f1d7b7492f79b21a13a28",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "host-business-tests",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Pinned original native task browser journey passed; scoped upstream suites 53 tests/475 assertions each are retained in the compilation reports, not inferred as a full suite",
+      "evidence": [
+        {
+          "path": "evidence/baseline.json",
+          "sha256": "20f12a9be8e5f367d910774939ca3b74a3ea4f47e1575c3a842b1a04bc4eb60e",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "black-box-business-differential",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Real original and candidate native task journey agree on task state and authority/CSRF responses; original screenshot is immutable evidence reference, not pixel parity",
+      "evidence": [
+        {
+          "path": "evidence/differential.json",
+          "sha256": "faeceae93f937b2dfc26ac0443633ffa16e577f55027933752444e28ca383357",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "authenticated-runtime",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Actual GovernedRuntime/ToolBroker and native PHP host passed approval,role,CSRF,stale,replay,lost-response and restart fail-closed checks",
+      "evidence": [
+        {
+          "path": "evidence/runtime.json",
+          "sha256": "1cc5a5204c6a896daee199e0112f7e8bd850861a3ae0214cbbcc25b8a549ce04",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "browser-acceptance",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Real browser original controls and assistant flows, screenshots,drag,close focus and narrow viewport passed",
+      "evidence": [
+        {
+          "path": "evidence/browser.json",
+          "sha256": "f3724f10ec294b030a2275141e1d0eb90e364e7f5b7c013c7f6975233c547128",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "fixture-process-completion",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "All owned browser,PHP,Node and test processes exited; loopback ports closed; temporary data removed",
+      "evidence": []
+    },
+    {
+      "name": "delivery-authorization-valid",
+      "status": "pass",
+      "expected": "Delivery completed before 2026-10-25T09:07:27.755Z",
+      "actual": "Approval remained current through delivery",
+      "evidence": []
+    }
+  ],
+  "verificationScope": "kanboard-upstream-v1",
+  "limitations": [
+    "General commands and network allowlists remain empty; only the explicit fixed verification profile permits its reviewed local commands and loopback networking.",
+    "Integrity hashes are not signatures and do not establish approval or execution authenticity.",
+    "Complete applies only to the exact kanboard-upstream-v1 fixture and its fixed gates, not arbitrary customers or production readiness.",
+    "Only patch-owned source and rollback bytes are included. No deployment, dependency installation, external network, or paid calls are authorized."
+  ]
+}

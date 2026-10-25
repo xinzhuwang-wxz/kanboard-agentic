@@ -1,0 +1,123 @@
+{
+  "profile": "kanboard-upstream-v1",
+  "status": "pass",
+  "trust": {
+    "source": {
+      "sourceCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+      "gitTree": "af8a3162d9a66f2d6b5fe3615ba5a4dd273b2de2",
+      "fileCount": 2790,
+      "codeHash": "ed8edb8f03935cd1f0d52a12adfa799c86e861c40964878118607f2879bca4ba"
+    },
+    "candidate": {
+      "sourceCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+      "gitTree": "af8a3162d9a66f2d6b5fe3615ba5a4dd273b2de2",
+      "fileCount": 2804,
+      "codeHash": "86df7e3c09e6eca6af17c15ba8ee34288d293f4758b83d3d0cbfe83b0ee99ff1"
+    },
+    "sourceTreeHash": "ed8edb8f03935cd1f0d52a12adfa799c86e861c40964878118607f2879bca4ba",
+    "candidateTreeHash": "86df7e3c09e6eca6af17c15ba8ee34288d293f4758b83d3d0cbfe83b0ee99ff1"
+  },
+  "provenance": {
+    "sourceVersion": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+    "php": "8.4.27",
+    "runtimeHash": "1afc65a40c46195ed2c3371447263a2995c8ca9ee8887c4b12771e9eb9b5e71e",
+    "browser": "qualified-chromium-headless-shell",
+    "probeHash": "ffe81dca8b32737245c333a5218e514b1f6a2a5f31f19fa0e964a0d84b04ab4e",
+    "lockfileHash": "762d169e68e916a31eefbf749a8a8173f1e78065b559e03931ea4dc0b80c22fd",
+    "toolFiles": {
+      "packages/transformation/dist/kanboard-baseline.js": "6e98cfde6f9c4d9ac83126f25d84a8a595289d74506ae51b9d6622bddfb1b0b4",
+      "packages/transformation/dist/kanboard-process.js": "47450b585410dc73bd068121a9f6719ea610119bf05af7506ecdc8ea721f20be",
+      "packages/transformation/dist/kanboard-harness.js": "1b22b08ac54fd185ff6712f2fba4a5e49df91e71fc9b8883995b367bc459e341",
+      "packages/transformation/dist/recipes/kanboard.js": "d1878a7c5f26eabf749e6098d96009e9aa01afe2aa0bd79c6e392f43380db597",
+      "packages/runtime-core/dist/index.js": "180f13e9a28091ba910642a3087b994c4cad5a4cd39f42b6c2160cd4fd50a1bf",
+      "packages/capabilities/dist/index.js": "a4f7ee59f70d10e62fe5ff7fd6107993e73a55b6e9bf5c0f045da1003321401d",
+      "packages/policy/dist/index.js": "b3e6cb115193981901aaf387aa415c5f4c505110413892f278f4dda09bba5b67"
+    }
+  },
+  "checks": [
+    {
+      "name": "host-compilation",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "PHP original/generated syntax and generated JavaScript parse passed",
+      "evidence": [
+        {
+          "path": "evidence/original-build.json",
+          "sha256": "c87a58771072da0be317a454668393db96013d54b6821a9edd404c49ebdcb4c3",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        },
+        {
+          "path": "evidence/candidate-build.json",
+          "sha256": "dbe60f92cb3a778316db5efdd72974011485f18ed62f1d7b7492f79b21a13a28",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "host-business-tests",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Pinned original native task browser journey passed; scoped upstream suites 53 tests/475 assertions each are retained in the compilation reports, not inferred as a full suite",
+      "evidence": [
+        {
+          "path": "evidence/baseline.json",
+          "sha256": "20f12a9be8e5f367d910774939ca3b74a3ea4f47e1575c3a842b1a04bc4eb60e",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "black-box-business-differential",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Real original and candidate native task journey agree on task state and authority/CSRF responses; original screenshot is immutable evidence reference, not pixel parity",
+      "evidence": [
+        {
+          "path": "evidence/differential.json",
+          "sha256": "faeceae93f937b2dfc26ac0443633ffa16e577f55027933752444e28ca383357",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "authenticated-runtime",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Actual GovernedRuntime/ToolBroker and native PHP host passed approval,role,CSRF,stale,replay,lost-response and restart fail-closed checks",
+      "evidence": [
+        {
+          "path": "evidence/runtime.json",
+          "sha256": "1cc5a5204c6a896daee199e0112f7e8bd850861a3ae0214cbbcc25b8a549ce04",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "browser-acceptance",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "Real browser original controls and assistant flows, screenshots,drag,close focus and narrow viewport passed",
+      "evidence": [
+        {
+          "path": "evidence/browser.json",
+          "sha256": "f3724f10ec294b030a2275141e1d0eb90e364e7f5b7c013c7f6975233c547128",
+          "note": "Actual pinned upstream Kanboard execution; synthetic local data only"
+        }
+      ]
+    },
+    {
+      "name": "fixture-process-completion",
+      "status": "pass",
+      "expected": "Observed exact pinned Kanboard host/runtime/browser qualification",
+      "actual": "All owned browser,PHP,Node and test processes exited; loopback ports closed; temporary data removed",
+      "evidence": []
+    }
+  ],
+  "cleanup": {
+    "status": "complete"
+  },
+  "process": {
+    "completed": true,
+    "noOutstandingChildren": true
+  }
+}

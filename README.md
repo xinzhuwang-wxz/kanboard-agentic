@@ -1,34 +1,37 @@
-Kanboard
-========
+# Kanboard Agentic
 
-Kanboard is project management software that focuses on the Kanban methodology.
+Kanboard’s original PHP task board, enhanced with a native draggable assistant powered by Agentic Everything’s shared `GovernedRuntime` and `ToolBroker`.
 
-**This application is in maintenance mode**. What does it mean?
+## Bounded capabilities
 
-Citing [Wikipedia](https://en.wikipedia.org/wiki/Maintenance_mode):
+- Read one task under the current user’s native project permissions.
+- Preview and explicitly confirm task status or assignee changes.
+- Preserve original task UI, roles, membership, CSRF and host-owned SQLite receipts.
+- Reject stale, repeated, cancelled and unauthorized confirmations; fail closed after runtime restart.
+- Administrator enable/disable controls in **Settings → Agentic Everything**.
 
-> In the world of software development, maintenance mode refers to a point in a computer program's life when it has reached all of its goals and is generally considered to be "complete" and bug-free. The term can also refer to the point in a software product's evolution when it is no longer competitive with other products or current with regard to the technology environment it operates within.
+The included provider is explicitly a **deterministic demo**, not a paid AI service. A real caller path through AE’s `FileModelProvider` is available; no model API or external deployment is configured.
 
-- The [author](#credits) of this application is not actively developing any new major features (only small fixes)
-- New releases are published regularly depending on the contributions made by the community
-- Pull requests for new features and bug fixes are accepted as long as the [guidelines](.github/pull_request_template.md) are followed
+## Start and develop
 
-Table of Contents
------------------
+See the [integration guide](plugins/AgenticEverything/README.md) for runtime prerequisites, launcher commands, architecture, trust boundaries, configuration and recovery. The [original upstream README](docs/UPSTREAM_README.md) preserves Kanboard documentation and links.
 
-- Official website: <https://kanboard.org/>
-- [List of features](https://kanboard.org/#features)
-- [Change Log](https://github.com/kanboard/kanboard/blob/main/ChangeLog)
-- [Forum](https://kanboard.discourse.group/)
-- Official documentation: <https://docs.kanboard.org/>
-    - [Requirements](https://docs.kanboard.org/v1/admin/requirements/)
-    - [Installation instructions](https://docs.kanboard.org/v1/admin/installation/)
-    - [Upgrade to a new version](https://docs.kanboard.org/v1/admin/upgrade/)
-    - [Use Kanboard with Docker](https://docs.kanboard.org/v1/admin/docker/)
+## Actual acceptance
 
-Credits
--------
+Pinned original: Kanboard **1.2.56**, commit `e197e71af4ff9f371b931ab0338b2b41827e6394`. Adaptation recipe: `kanboard-upstream@1.0.4`.
 
-- Main developer: Frédéric Guillot
-- [Contributors](https://github.com/kanboard/kanboard/graphs/contributors)
-- Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/main/LICENSE)
+The real AE assessment → plan → approval → original baseline → apply → delivery → delivery-check lifecycle completed on 2026-10-25. All six scoped gates passed, with **20 actual browser/runtime checks**, and **53 native tests / 475 assertions** independently on original and candidate. Static verification alone correctly reported execution not run; acceptance uses the actual delivery evidence.
+
+- [Accepted delivery bundle](docs/agentic-evidence/delivery/manifest.json)
+- [Independent delivery-check result](docs/agentic-evidence/delivery-check.json)
+- [Acceptance scope and limitations](docs/agentic-evidence/README.md)
+
+| Original host | Governed assistant |
+|---|---|
+| ![Actual original task page](docs/agentic-evidence/screenshots/original-before.png) | ![Actual assistant confirmation](docs/agentic-evidence/screenshots/candidate-approval.png) |
+
+[Actual narrow-screen screenshot](docs/agentic-evidence/screenshots/candidate-narrow.png)
+
+## License
+
+Kanboard retains its original [MIT license](LICENSE). The integration has its own [MIT license](plugins/AgenticEverything/LICENSE). Bundled upstream components retain their licenses, including PHPQRCode’s LGPLv3; see [third-party notices](plugins/AgenticEverything/THIRD_PARTY_NOTICES.md). No upstream attribution is removed.

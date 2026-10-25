@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1",
+  "planId": "adapt-1208efc146566ea3",
+  "projectId": "project-a76fe000898b",
+  "baseCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+  "assessmentHash": "1208efc146566ea3f65f98590c94025cfe3289c775a1009c74a119ea31145b03",
+  "goals": [
+    "Add a native Kanboard plugin with a draggable task assistant and administrator availability control."
+  ],
+  "nonGoals": [
+    "Replacing PHP, Kanboard task models, roles or sessions",
+    "Paid model APIs",
+    "Deployment",
+    "Automatic retries of unknown writes",
+    "External tasks or automated project actions"
+  ],
+  "capabilities": [
+    "Authorized single task read",
+    "Confirmed assignee or open/closed status update",
+    "Subject-bound durable operation receipt"
+  ],
+  "recipes": [
+    {
+      "id": "kanboard-upstream",
+      "version": "1.0.4"
+    }
+  ],
+  "allowedPaths": [
+    "plugins/AgenticEverything/Assets/assistant.css",
+    "plugins/AgenticEverything/Assets/assistant.js",
+    "plugins/AgenticEverything/Controller/AeController.php",
+    "plugins/AgenticEverything/LICENSE",
+    "plugins/AgenticEverything/Plugin.php",
+    "plugins/AgenticEverything/README.md",
+    "plugins/AgenticEverything/Runtime/host.php",
+    "plugins/AgenticEverything/Runtime/serve.mjs",
+    "plugins/AgenticEverything/Schema/Sqlite.php",
+    "plugins/AgenticEverything/THIRD_PARTY_NOTICES.md",
+    "plugins/AgenticEverything/Template/assistant.php",
+    "plugins/AgenticEverything/Template/settings.php",
+    "plugins/AgenticEverything/Template/sidebar.php",
+    "plugins/AgenticEverything/licenses/GPL-3.0.txt"
+  ],
+  "dependencies": [
+    "PHP 8.3+ with SQLite/XML/GD/mbstring and original bundled dependencies; no new product runtime packages"
+  ],
+  "commands": [],
+  "networkAllowlist": [],
+  "dataFlows": [
+    "Browser requests stay same-origin and use host session and CSRF; task data stays in host SQLite. No model provider is configured."
+  ],
+  "migrations": [
+    "Native plugin migration adds ae_task_operations receipt table; original task tables are unchanged."
+  ],
+  "verification": [
+    "Exact patch hashes and reviewed templates",
+    "Pinned original host baseline",
+    "Original host tests",
+    "Authenticated positive and negative task flows",
+    "Real browser and recovery checks"
+  ],
+  "rollback": [
+    "Disable or remove only this plugin; retain original task data and operation receipts. Database backup required for upgrades."
+  ],
+  "verificationAuthorization": {
+    "version": "1",
+    "profile": "kanboard-upstream-v1",
+    "actions": [
+      "baseline-differential",
+      "host-build",
+      "runtime-http",
+      "browser"
+    ],
+    "isolation": "exact-pinned-upstream-temporary-worktree",
+    "network": "loopback-only-no-external",
+    "maximumCostUsd": 0,
+    "maximumElapsedMs": 300000,
+    "maximumHeapMiB": 640,
+    "sourceCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394"
+  },
+  "cost": {
+    "currency": "USD",
+    "maximum": 0,
+    "paidCallsAllowed": false
+  }
+}

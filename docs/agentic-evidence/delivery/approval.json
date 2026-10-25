@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1",
+  "approvalId": "3e92e622-c88b-4738-9464-6f21481dbb14",
+  "approverId": "delegated-assistant/project-operator",
+  "planHash": "8aef83d58767ad00dc52e1e5f6717e2775a8efdec916ef887f16a4e46d404366",
+  "baseCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394",
+  "allowedPaths": [
+    "plugins/AgenticEverything/Assets/assistant.css",
+    "plugins/AgenticEverything/Assets/assistant.js",
+    "plugins/AgenticEverything/Controller/AeController.php",
+    "plugins/AgenticEverything/LICENSE",
+    "plugins/AgenticEverything/Plugin.php",
+    "plugins/AgenticEverything/README.md",
+    "plugins/AgenticEverything/Runtime/host.php",
+    "plugins/AgenticEverything/Runtime/serve.mjs",
+    "plugins/AgenticEverything/Schema/Sqlite.php",
+    "plugins/AgenticEverything/THIRD_PARTY_NOTICES.md",
+    "plugins/AgenticEverything/Template/assistant.php",
+    "plugins/AgenticEverything/Template/settings.php",
+    "plugins/AgenticEverything/Template/sidebar.php",
+    "plugins/AgenticEverything/licenses/GPL-3.0.txt"
+  ],
+  "allowedCommands": [],
+  "networkAllowlist": [],
+  "maximumCostUsd": 0,
+  "excludedActions": [
+    "deployment",
+    "publishing",
+    "dependency installation",
+    "source execution outside the exact pinned upstream verification profile",
+    "paid model calls"
+  ],
+  "approvedAt": "2026-10-25T08:07:27.754Z",
+  "expiresAt": "2026-10-25T09:07:27.755Z",
+  "authorizationRef": "Sentinel_67833a187ad0819189f249fc36f8bcde",
+  "verificationAuthorization": {
+    "version": "1",
+    "profile": "kanboard-upstream-v1",
+    "actions": [
+      "baseline-differential",
+      "host-build",
+      "runtime-http",
+      "browser"
+    ],
+    "isolation": "exact-pinned-upstream-temporary-worktree",
+    "network": "loopback-only-no-external",
+    "maximumCostUsd": 0,
+    "maximumElapsedMs": 300000,
+    "maximumHeapMiB": 640,
+    "sourceCommit": "e197e71af4ff9f371b931ab0338b2b41827e6394"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "language": "PHP8.4.27",
+  "sourceTreeHash": "86df7e3c09e6eca6af17c15ba8ee34288d293f4758b83d3d0cbfe83b0ee99ff1",
+  "phpLint": [
+    "index.php",
+    "plugins/AgenticEverything/Controller/AeController.php",
+    "plugins/AgenticEverything/Plugin.php",
+    "plugins/AgenticEverything/Runtime/host.php",
+    "plugins/AgenticEverything/Schema/Sqlite.php",
+    "plugins/AgenticEverything/Template/assistant.php",
+    "plugins/AgenticEverything/Template/settings.php",
+    "plugins/AgenticEverything/Template/sidebar.php"
+  ],
+  "javascriptSyntax": [
+    "plugins/AgenticEverything/Assets/assistant.js",
+    "plugins/AgenticEverything/Runtime/serve.mjs"
+  ],
+  "exitCode": 0,
+  "tests": 53,
+  "assertions": 475,
+  "stdout": "PHPUnit 12.5.40 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.4.27\nConfiguration: /workspace/scratch/3f0d047b74f0/kanboard-agentic-candidate/tests/units.sqlite.xml\n\n.....................................................             53 / 53 (100%)\n\nTime: 00:13.513, Memory: 60.06 MB\n\nOK (53 tests, 475 assertions)\n",
+  "stdoutHash": "ce9ea4f927e3695d312acc21db326036beb55a95433a6b30dca5cbb0e444c7be",
+  "phpunitHash": "83f8098d7e6513befa61cd0df2689d42398d43404969b0dc21528ff52674ebc6",
+  "stopwatchHash": "09402e8388ccc527dc6eb3e53d4f579e4cabcfff21600d2a03e8036b0983211f"
+}
